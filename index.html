@@ -306,7 +306,43 @@
                 order: 3; /* Pemain 2 paling bawah */
             }
         }
-
+        /* --- FOOTER --- */
+            .app-footer {
+                position: fixed;
+                bottom: 10px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 0.85rem; /* Ukuran font sedikit lebih kecil agar manis */
+                color: #1e3a8a; /* Mengikuti warna tema biru tua */
+                z-index: 9999; /* Pastikan berada di atas elemen lain */
+                font-weight: 600;
+                pointer-events: none; /* Agar area kosong di footer tidak menghalangi klik pada game */
+                text-shadow: 0 1px 2px rgba(255,255,255,0.8); /* Agar teks terbaca jelas di atas background apapun */
+            }
+            
+            .app-footer a {
+                color: #2563eb; /* Warna biru link */
+                text-decoration: none;
+                font-weight: 800;
+                pointer-events: auto; /* Aktifkan klik khusus untuk link */
+                transition: color 0.2s;
+            }
+            
+            .app-footer a:hover {
+                color: #d946ef; /* Efek warna saat kursor diarahkan (opsional) */
+                text-decoration: underline;
+            }
+            
+            /* Penyesuaian untuk Mobile agar tidak menumpuk elemen penting */
+            @media (max-width: 768px) {
+                .app-footer {
+                    bottom: 5px;
+                    font-size: 0.75rem;
+                    background-color: rgba(240, 249, 255, 0.8); /* Latar belakang semi-transparan di HP */
+                    padding: 4px 0;
+                }
+            }
     </style>
 </head>
 <body>
@@ -448,6 +484,10 @@
         </div>
     </div>
 
+    <div class="app-footer">
+        @2025 Pengembang <a href="https://ajnugraha.carrd.co" target="_blank" title="ajnugraha app">AJ Nugraha</a> | Dibuat dengan Gemini Ai
+    </div>
+    
     <script>
         // --- BANK SOAL ---
         // Saya telah mengubah soal isian singkat menjadi Pilihan Ganda
