@@ -581,358 +581,345 @@
     </div>
     
     <script>
-        // --- BANK SOAL ---
-        // Kode bank soal tetap sama
-        const questionBank = {
-            // ... kode bank soal tetap sama
-        };
-    
-        // --- ELEMEN DOM ---
-        // Kode elemen DOM tetap sama
-        const gameModal = document.getElementById('gameModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalText = document.getElementById('modalText');
-        const startBtn = document.getElementById('startBtn');
+    // --- BANK SOAL ---
+    const questionBank = {
+        easy: [
+            { q: "Penggaris digunakan untuk mengukur...", o: ["panjang benda", "berat benda", "suhu benda", "waktu"], a: "panjang benda" },
+            { q: "Satuan baku untuk mengukur panjang adalah...", o: ["meter", "kilogram", "liter", "detik"], a: "meter" },
+            { q: "Satuan baku untuk mengukur berat adalah...", o: ["kilogram", "meter", "gram", "sentimeter"], a: "kilogram" },
+            { q: "Panjang sebuah pensil adalah 10...", o: ["meter", "sentimeter", "kilogram", "gram"], a: "sentimeter" },
+            { q: "Berat sebuah apel kira-kira 200...", o: ["gram", "kilogram", "meter", "ton"], a: "gram" },
+            { q: "1 meter sama dengan... sentimeter.", o: ["10", "100", "1000", "1"], a: "100" },
+            { q: "1 kilogram sama dengan... gram.", o: ["10", "100", "1000", "10000"], a: "1000" },
+            { q: "Alat untuk menimbang berat badan adalah...", o: ["penggaris", "timbangan badan", "meteran", "jam"], a: "timbangan badan" },
+            { q: "Alat untuk mengukur panjang meja adalah...", o: ["timbangan", "jam", "penggaris", "gelas ukur"], a: "penggaris" },
+            { q: "Jika penggaris menunjukkan angka 15, maka panjang benda itu adalah... cm.", o: ["15 cm", "1.5 cm", "150 cm", "0.15 cm"], a: "15 cm" },
+            { q: "Satuan yang lebih kecil dari meter adalah...", o: ["kilogram", "sentimeter", "kilometer", "ton"], a: "sentimeter" },
+            { q: "Satuan yang lebih besar dari gram adalah...", o: ["miligram", "sentimeter", "kilogram", "meter"], a: "kilogram" },
+            { q: "50 cm = ... m.", o: ["5 m", "50 m", "0.5 m", "0.05 m"], a: "0.5 m" },
+            { q: "500 g = ... kg.", o: ["5 kg", "50 kg", "0.5 kg", "0.05 kg"], a: "0.5 kg" },
+            { q: "Panjang meja 1 meter, berarti sama dengan... cm.", o: ["10 cm", "1 cm", "1000 cm", "100 cm"], a: "100 cm" },
+            { q: "Berat 5 buah jeruk kira-kira... gram.", o: ["10 gram", "100 gram", "1000 gram", "1 gram"], a: "1000 gram" },
+            { q: "Jika berat 1 telur 60 gram, maka berat 2 telur adalah... gram.", o: ["60 gram", "62 gram", "120 gram", "100 gram"], a: "120 gram" },
+            { q: "Penggaris biasanya memiliki panjang... cm.", o: ["30 cm", "3 cm", "300 cm", "100 cm"], a: "30 cm" },
+            { q: "Alat untuk mengukur panjang kain adalah...", o: ["meteran", "timbangan", "jam", "penggaris"], a: "meteran" },
+            { q: "Timbangan digunakan untuk mengukur... benda.", o: ["panjang", "berat", "suhu", "volume"], a: "berat" }
+        ],
+        medium: [
+            { q: "Sebuah tali memiliki panjang 2 meter. Panjang itu sama dengan... cm.", o: ["20 cm", "2 cm", "200 cm", "2000 cm"], a: "200 cm" },
+            { q: "Berat sebuah semangka adalah 3 kg. Berat itu sama dengan... gram.", o: ["3000 gram", "300 gram", "30 gram", "3 gram"], a: "3000 gram" },
+            { q: "Buku panjangnya 25 cm, pensil 15 cm. Selisih panjangnya adalah... cm.", o: ["5 cm", "10 cm", "15 cm", "40 cm"], a: "10 cm" },
+            { q: "Botol berisi gula 800 gram. Jika ditambah 200 gram lagi, berat seluruhnya... gram.", o: ["900 gram", "1000 gram", "820 gram", "600 gram"], a: "1000 gram" },
+            { q: "Berat satu karung beras adalah 25 kg. Dua karung beras beratnya... kg.", o: ["27 kg", "25 kg", "50 kg", "100 kg"], a: "50 kg" },
+            { q: "Meja panjangnya 1 meter 20 cm. Jika diubah ke sentimeter menjadi... cm.", o: ["120 cm", "12 cm", "1020 cm", "1.2 cm"], a: "120 cm" },
+            { q: "Pita merah 150 cm, pita biru 2 meter. Pita yang lebih panjang adalah...", o: ["pita merah", "pita biru", "sama panjang", "tidak bisa diukur"], a: "pita biru" },
+            { q: "Ayam 2 kg, bebek 3 kg. Selisih berat keduanya... kg.", o: ["1 kg", "2 kg", "3 kg", "5 kg"], a: "1 kg" },
+            { q: "2500 gram sama dengan... kilogram.", o: ["250 kg", "25 kg", "2.5 kg", "0.25 kg"], a: "2.5 kg" },
+            { q: "400 cm sama dengan... meter.", o: ["400 m", "40 m", "4 m", "0.4 m"], a: "4 m" },
+            { q: "Berat 5 apel masing-masing 100 gram adalah... gram seluruhnya.", o: ["100 gram", "105 gram", "50 gram", "500 gram"], a: "500 gram" },
+            { q: "Kursi panjangnya 80 cm. Jika ingin panjangnya 1 meter, perlu ditambah... cm.", o: ["10 cm", "20 cm", "80 cm", "100 cm"], a: "20 cm" },
+            { q: "3 meter = ... cm.", o: ["3 cm", "30 cm", "300 cm", "3000 cm"], a: "300 cm" },
+            { q: "5 kg = ... gram.", o: ["5 gram", "50 gram", "500 gram", "5000 gram"], a: "5000 gram" },
+            { q: "Panjang papan tulis 2 meter, berarti panjangnya... cm.", o: ["20 cm", "200 cm", "2000 cm", "2 cm"], a: "200 cm" },
+            { q: "Kucing 4 kg, tikus 500 gram. Selisih berat mereka... gram.", o: ["1000 gram", "3.5 gram", "3500 gram", "4500 gram"], a: "3500 gram" },
+            { q: "Sebuah batu beratnya 2,5 kg. Jika diubah ke gram menjadi... gram.", o: ["250 gram", "25 gram", "2500 gram", "0.25 gram"], a: "2500 gram" },
+            { q: "Tali 300 cm. Dipotong 3 bagian sama panjang, tiap bagian... cm.", o: ["30 cm", "100 cm", "300 cm", "10 cm"], a: "100 cm" },
+            { q: "Berat buah mangga 250 gram. Berat 4 mangga... gram.", o: ["1000 gram", "250 gram", "254 gram", "500 gram"], a: "1000 gram" },
+            { q: "1500 gram = ... kg.", o: ["15 kg", "1.5 kg", "150 kg", "0.15 kg"], a: "1.5 kg" }
+        ],
+        hard: [
+            { q: "Kayu 2,5 meter. Dipotong 5 bagian sama panjang, setiap bagian... cm.", o: ["50 cm", "5 cm", "25 cm", "100 cm"], a: "50 cm" },
+            { q: "Satu kotak susu 250 gram. 12 kotak, berat seluruhnya... kg.", o: ["3000 kg", "300 kg", "30 kg", "3 kg"], a: "3 kg" },
+            { q: "Kain panjangnya 3 meter 40 cm. Jika diubah ke cm menjadi... cm.", o: ["340 cm", "34 cm", "3040 cm", "70 cm"], a: "340 cm" },
+            { q: "Berat 8 bungkus tepung @125 gram adalah... gram.", o: ["100 gram", "800 gram", "1000 gram", "1250 gram"], a: "1000 gram" },
+            { q: "Beli 2 kg gula dan 1,5 kg tepung. Berat total belanjaan... gram.", o: ["3.5 gram", "350 gram", "3500 gram", "2150 gram"], a: "3500 gram" },
+            { q: "Pipa besi 250 cm. Dibelah dua sama panjang, tiap pipa... meter.", o: ["1.25 meter", "125 meter", "12.5 meter", "2.5 meter"], a: "1.25 meter" },
+            { q: "Berat ikan 2,75 kg. Jika diubah ke gram menjadi... gram.", o: ["275 gram", "2750 gram", "27.5 gram", "2.75 gram"], a: "2750 gram" },
+            { q: "Tali 4,5 meter. Dipotong 1,2 meter, sisa tali... cm.", o: ["3.3 cm", "33 cm", "330 cm", "3300 cm"], a: "330 cm" },
+            { q: "3,5 kg = ... gram.", o: ["35 gram", "350 gram", "3500 gram", "0.35 gram"], a: "3500 gram" },
+            { q: "Pita 240 cm. Digunakan 1,5 meter, sisanya... cm.", o: ["90 cm", "100 cm", "225 cm", "150 cm"], a: "90 cm" },
+            { q: "Ayam 2,3 kg dan bebek 1,8 kg. Berat seluruhnya... kg.", o: ["3.1 kg", "4.1 kg", "4.0 kg", "3.11 kg"], a: "4.1 kg" },
+            { q: "Papan 1,2 meter. Diperpanjang jadi 2,5 meter, perlu tambahan... cm.", o: ["1.3 cm", "13 cm", "130 cm", "1300 cm"], a: "130 cm" },
+            { q: "7,5 meter = ... cm.", o: ["75 cm", "750 cm", "7500 cm", "7.5 cm"], a: "750 cm" },
+            { q: "4500 gram = ... kg.", o: ["45 kg", "4.5 kg", "0.45 kg", "450 kg"], a: "4.5 kg" },
+            { q: "Ember berisi pasir 5 kg. Dipakai 1,25 kg, sisa pasir... gram.", o: ["3.75 gram", "375 gram", "3750 gram", "4000 gram"], a: "3750 gram" },
+            { q: "Dua besi @1,75 meter. Digabung, panjang totalnya... cm.", o: ["350 cm", "3.5 cm", "35 cm", "3500 cm"], a: "350 cm" },
+            { q: "Berat 1 bola 0,5 kg. Berat 10 bola... gram.", o: ["50 gram", "500 gram", "5000 gram", "5 kg"], a: "5000 gram" },
+            { q: "Benang 1200 cm. Diubah ke meter menjadi... meter.", o: ["1.2 meter", "12 meter", "120 meter", "0.12 meter"], a: "12 meter" },
+            { q: "Sapi 250 kg, kambing 35 kg. Selisih beratnya... kg.", o: ["215 kg", "225 kg", "285 kg", "115 kg"], a: "215 kg" },
+            { q: "Papan 3 meter dipotong 4 bagian sama panjang. Panjang tiap bagian... cm.", o: ["75 cm", "100 cm", "50 cm", "120 cm"], a: "75 cm" }
+        ]
+    };
+
+    // --- ELEMEN DOM ---
+    const gameModal = document.getElementById('gameModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalText = document.getElementById('modalText');
+    const startBtn = document.getElementById('startBtn');
+    const car1 = document.getElementById('car1');
+    const car2 = document.getElementById('car2');
+    const score1Display = document.getElementById('score1');
+    const score2Display = document.getElementById('score2');
+    const q1Text = document.getElementById('question1');
+    const q2Text = document.getElementById('question2');
+    const p1Choices = [document.getElementById('p1-choice0'), document.getElementById('p1-choice1'), document.getElementById('p1-choice2'), document.getElementById('p1-choice3')];
+    const p2Choices = [document.getElementById('p2-choice0'), document.getElementById('p2-choice1'), document.getElementById('p2-choice2'), document.getElementById('p2-choice3')];
+
+    // --- STATUS GAME ---
+    let player1Progress = 0;
+    let player2Progress = 0;
+    let player1Questions = [];
+    let player2Questions = [];
+    let gameActive = false;
+    const totalQuestions = 10;
+    let isMobile = false;
+    let player1Penalized = false;
+    let player2Penalized = false;
+
+    // --- FUNGSI GAME ---
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function generatePlayerQuestions() {
+        const easy = shuffleArray([...questionBank.easy]).slice(0, 5);
+        const medium = shuffleArray([...questionBank.medium]).slice(0, 3);
+        const hard = shuffleArray([...questionBank.hard]).slice(0, 2);
+        return shuffleArray([...easy, ...medium, ...hard]);
+    }
+
+    function startGame() {
+        gameModal.style.display = 'flex';
+        startBtn.disabled = true;
         
-        const car1 = document.getElementById('car1');
-        const car2 = document.getElementById('car2');
+        modalText.style.fontSize = '8rem';
+        modalText.style.fontWeight = '900';
+        modalText.style.lineHeight = '1';
         
-        const score1Display = document.getElementById('score1');
-        const score2Display = document.getElementById('score2');
+        let countdown = 3;
+        modalTitle.textContent = "Bersiap!";
+        modalText.textContent = countdown;
         
-        const q1Text = document.getElementById('question1');
-        const q2Text = document.getElementById('question2');
-        
-        const p1Choices = [document.getElementById('p1-choice0'), document.getElementById('p1-choice1'), document.getElementById('p1-choice2'), document.getElementById('p1-choice3')];
-        const p2Choices = [document.getElementById('p2-choice0'), document.getElementById('p2-choice1'), document.getElementById('p2-choice2'), document.getElementById('p2-choice3')];
-    
-        // --- STATUS GAME ---
-        let player1Progress = 0;
-        let player2Progress = 0;
-        let player1Questions = [];
-        let player2Questions = [];
-        let gameActive = false;
-        const totalQuestions = 10;
-        let isMobile = false; // Untuk cek tampilan mobile
-        let player1Penalized = false; // Status penalti P1
-        let player2Penalized = false; // Status penalti P2
-    
-        // --- FUNGSI GAME ---
-    
-        // Fungsi untuk mengacak array (Fisher-Yates shuffle)
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                modalText.textContent = countdown;
+            } else if (countdown === 0) {
+                modalText.textContent = "MULAI!";
+            } else {
+                clearInterval(countdownInterval);
+                gameActive = true;
+                player1Progress = 0;
+                player2Progress = 0;
+                player1Penalized = false;
+                player2Penalized = false;
+                
+                player1Questions = generatePlayerQuestions();
+                player2Questions = generatePlayerQuestions();
+                
+                resetCarPositions(); // Fungsi baru untuk reset posisi mobil
+                displayQuestion(1);
+                displayQuestion(2);
+                updateScoreboard();
+                
+                gameModal.style.display = 'none';
+                startBtn.disabled = false;
             }
-            return array;
+        }, 1000);
+    }
+
+    function displayQuestion(playerNum) {
+        if ((playerNum === 1 && player1Penalized) || (playerNum === 2 && player2Penalized)) {
+            return; 
         }
-    
-        // Fungsi untuk membuat 10 soal untuk pemain
-        function generatePlayerQuestions() {
-            const easy = shuffleArray([...questionBank.easy]).slice(0, 5);
-            const medium = shuffleArray([...questionBank.medium]).slice(0, 3);
-            const hard = shuffleArray([...questionBank.hard]).slice(0, 2);
-            // Gabung dan acak lagi agar urutan tidak tertebak
-            return shuffleArray([...easy, ...medium, ...hard]);
+        
+        const progress = (playerNum === 1) ? player1Progress : player2Progress;
+        
+        if (progress >= totalQuestions) {
+            const qText = (playerNum === 1) ? q1Text : q2Text;
+            qText.textContent = "Menunggu lawan selesai...";
+            const choices = (playerNum === 1) ? p1Choices : p2Choices;
+            choices.forEach(btn => btn.style.display = 'none');
+            return;
         }
-    
-        // Fungsi untuk memulai game
-        function startGame() {
-            // 1. Tampilkan modal untuk countdown & nonaktifkan tombol
-            gameModal.style.display = 'flex';
-            startBtn.disabled = true; // Mencegah klik ganda
+        
+        const questions = (playerNum === 1) ? player1Questions : player2Questions;
+        const currentQ = questions[progress];
+        const qText = (playerNum === 1) ? q1Text : q2Text;
+        const choices = (playerNum === 1) ? p1Choices : p2Choices;
+        
+        qText.textContent = currentQ.q;
+        const shuffledOptions = shuffleArray([...currentQ.o]);
+        
+        choices.forEach((btn, index) => {
+            btn.style.display = 'block';
+            btn.textContent = `${String.fromCharCode(65 + index)}. ${shuffledOptions[index]}`;
+            btn.dataset.answer = shuffledOptions[index];
+            btn.onclick = null;
+            btn.onclick = () => handleAnswer(playerNum, btn);
+            btn.className = 'choice-btn';
+            btn.disabled = false;
+        });
+    }
+
+    function handleAnswer(playerNum, btn) {
+        if (!gameActive) return;
+        if ((playerNum === 1 && player1Penalized) || (playerNum === 2 && player2Penalized)) return;
+        
+        const progress = (playerNum === 1) ? player1Progress : player2Progress;
+        if (progress >= totalQuestions) return;
+
+        const questions = (playerNum === 1) ? player1Questions : player2Questions;
+        const currentQ = questions[progress];
+        const selectedAnswer = btn.dataset.answer;
+        const isCorrect = (selectedAnswer === currentQ.a);
+        
+        const choices = (playerNum === 1) ? p1Choices : p2Choices;
+        choices.forEach(b => {
+            b.disabled = true;
+            if (b.dataset.answer === currentQ.a) b.classList.add('correct');
+            else if (b === btn) b.classList.add('incorrect');
+        });
+
+        if (isCorrect) {
+            if (playerNum === 1) player1Progress++;
+            else player2Progress++;
             
-            // Atur font besar untuk countdown
-            modalText.style.fontSize = '8rem';
-            modalText.style.fontWeight = '900';
-            modalText.style.lineHeight = '1';
+            updateCarPosition(playerNum);
+            updateScoreboard();
             
-            // 2. Mulai Countdown
-            let countdown = 3;
-            modalTitle.textContent = "Bersiap!";
-            modalText.textContent = countdown;
+            setTimeout(() => displayQuestion(playerNum), 1200);
             
-            const countdownInterval = setInterval(() => {
+        } else {
+            const qText = (playerNum === 1) ? q1Text : q2Text;
+            if (playerNum === 1) player1Penalized = true;
+            else player2Penalized = true;
+
+            let countdown = 5;
+            qText.textContent = `PENALTI! Tunggu ${countdown} detik...`;
+
+            const penaltyInterval = setInterval(() => {
                 countdown--;
                 if (countdown > 0) {
-                    modalText.textContent = countdown;
-                } else if (countdown === 0) {
-                    modalText.textContent = "MULAI!";
+                    qText.textContent = `PENALTI! Tunggu ${countdown} detik...`;
                 } else {
-                    // Countdown selesai
-                    clearInterval(countdownInterval);
-                    
-                    // 3. Jalankan Logika Game Inti
-                    gameActive = true;
-                    player1Progress = 0;
-                    player2Progress = 0;
-                    player1Penalized = false;
-                    player2Penalized = false;
-                    
-                    player1Questions = generatePlayerQuestions();
-                    player2Questions = generatePlayerQuestions();
-                    
-                    displayQuestion(1);
-                    displayQuestion(2);
-                    
-                    // Set posisi awal mobil
-                    resetCarPositions();
-                    
-                    updateScoreboard();
-                    
-                    gameModal.style.display = 'none'; // Sembunyikan modal
-                    startBtn.disabled = false; // Aktifkan lagi (untuk "Main Lagi")
+                    clearInterval(penaltyInterval);
+                    if (playerNum === 1) player1Penalized = false;
+                    else player2Penalized = false;
+                    displayQuestion(playerNum);
                 }
             }, 1000);
         }
-    
-        // Fungsi untuk menampilkan soal
-        function displayQuestion(playerNum) {
-            // Cek jika sedang dalam penalti, jangan tampilkan soal baru
-            if ((playerNum === 1 && player1Penalized) || (playerNum === 2 && player2Penalized)) {
-                return; 
-            }
+    }
+
+    // FUNGSI YANG DIPERBAIKI
+    function updateCarPosition(playerNum) {
+        const progress = (playerNum === 1) ? player1Progress : player2Progress;
+        const car = (playerNum === 1) ? car1 : car2;
+        const movePercentage = (progress / totalQuestions) * 80;
+        
+        // Definisikan handler untuk event transitionend
+        const onMoveEnd = () => {
+            // PENTING: Hapus listener ini agar tidak dipanggil lagi di gerakan selanjutnya
+            car.removeEventListener('transitionend', onMoveEnd);
             
-            const progress = (playerNum === 1) ? player1Progress : player2Progress;
-            
+            // Cek apakah gerakan ini menghasilkan kemenangan
             if (progress >= totalQuestions) {
-                // Pemain sudah selesai, bisa tampilkan pesan
-                const qText = (playerNum === 1) ? q1Text : q2Text;
-                qText.textContent = "Menunggu lawan selesai...";
-                const choices = (playerNum === 1) ? p1Choices : p2Choices;
-                choices.forEach(btn => {
-                    btn.style.display = 'none'; // Sembunyikan tombol
-                });
-                return;
+                gameActive = false;
+                modalTitle.textContent = "FINISH!";
+                modalText.textContent = `Pemain ${playerNum} (${playerNum === 1 ? 'Biru' : 'Merah'}) MENANG!`;
+                startBtn.textContent = "MAIN LAGI?";
+                startBtn.onclick = resetGame; // Pastikan tombol berfungsi
+                gameModal.style.display = 'flex';
             }
-            
-            const questions = (playerNum === 1) ? player1Questions : player2Questions;
-            const currentQ = questions[progress];
-            
-            const qText = (playerNum === 1) ? q1Text : q2Text;
-            const choices = (playerNum === 1) ? p1Choices : p2Choices;
-            
-            qText.textContent = currentQ.q;
-            
-            // Acak pilihan jawaban
-            const shuffledOptions = shuffleArray([...currentQ.o]);
-            
-            choices.forEach((btn, index) => {
-                btn.style.display = 'block'; // Tampilkan tombol
-                btn.textContent = `${String.fromCharCode(65 + index)}. ${shuffledOptions[index]}`;
-                btn.dataset.answer = shuffledOptions[index]; // Simpan jawaban di data-set
-                
-                // Hapus event listener lama dan tambahkan yang baru
-                btn.onclick = null; // Hapus listener
-                btn.onclick = () => handleAnswer(playerNum, btn);
-                
-                // Reset style
-                btn.className = 'choice-btn';
-                btn.disabled = false;
-            });
-        }
-    
-        // Fungsi saat jawaban dipilih
-        function handleAnswer(playerNum, btn) {
-            if (!gameActive) return;
-    
-            // Cek status penalti di awal
-            if (playerNum === 1 && player1Penalized) return;
-            if (playerNum === 2 && player2Penalized) return;
-            
-            const progress = (playerNum === 1) ? player1Progress : player2Progress;
-            if (progress >= totalQuestions) return; // Sudah selesai
-    
-            const questions = (playerNum === 1) ? player1Questions : player2Questions;
-            const currentQ = questions[progress];
-            const selectedAnswer = btn.dataset.answer;
-            const isCorrect = (selectedAnswer === currentQ.a);
-            
-            const choices = (playerNum === 1) ? p1Choices : p2Choices;
-            
-            // Nonaktifkan semua tombol sementara
-            choices.forEach(b => {
-                b.disabled = true;
-                if (b.dataset.answer === currentQ.a) {
-                    b.classList.add('correct'); // Tunjukkan jawaban benar
-                } else if (b === btn) {
-                    b.classList.add('incorrect'); // Tunjukkan jawaban salah yg dipilih
-                }
-            });
-    
-            if (isCorrect) {
-                // Jawaban benar
-                if (playerNum === 1) {
-                    player1Progress++;
-                } else {
-                    player2Progress++;
-                }
-                
-                updateCarPosition(playerNum);
-                updateScoreboard();
-                
-                // Lanjut ke soal berikutnya setelah jeda
-                setTimeout(() => {
-                    displayQuestion(playerNum);
-                }, 1200); // Jeda 1.2 detik
-                
-            } else {
-                // Logika penalti
-                // Jawaban salah, PENALTI 5 DETIK
-                const qText = (playerNum === 1) ? q1Text : q2Text;
-                
-                if (playerNum === 1) {
-                    player1Penalized = true;
-                } else {
-                    player2Penalized = true;
-                }
-    
-                let countdown = 5;
-                qText.textContent = `PENALTI! Tunggu ${countdown} detik...`;
-    
-                const penaltyInterval = setInterval(() => {
-                    countdown--;
-                    if (countdown > 0) {
-                        qText.textContent = `PENALTI! Tunggu ${countdown} detik...`;
-                    } else {
-                        clearInterval(penaltyInterval);
-                        if (playerNum === 1) {
-                            player1Penalized = false;
-                        } else {
-                            player2Penalized = false;
-                        }
-                        
-                        // Setelah penalti selesai, tampilkan soal berikutnya
-                        displayQuestion(playerNum);
-                    }
-                }, 1000); // Hitung mundur setiap 1 detik
-            }
-        }
-    
-        // Fungsi update posisi mobil - DIPERBAIKI
-        function updateCarPosition(playerNum) {
-            const progress = (playerNum === 1) ? player1Progress : player2Progress;
-            const car = (playerNum === 1) ? car1 : car2;
-            
-            // Pergerakan 80% dari total tinggi (misal 5% s.d 85%)
-            const movePercentage = (progress / totalQuestions) * 80;
-            
-            // Buat handler untuk event transitionend
-            const moveEndHandler = (event) => {
-                // Hapus event listener ini agar tidak dipanggil lagi
-                car.removeEventListener('transitionend', moveEndHandler);
-                
-                // Cek apakah pemain ini menang
-                if (progress >= totalQuestions) {
-                    // Jika menang, hentikan game dan tampilkan modal
-                    gameActive = false;
-                    
-                    // Reset font modal sebelum tampilkan teks kemenangan
-                    modalText.style.fontSize = '1.2rem';
-                    modalText.style.fontWeight = 'normal';
-                    modalText.style.lineHeight = 'normal';
-                    
-                    modalTitle.textContent = "FINISH!";
-                    modalText.textContent = `Pemain ${playerNum} (${playerNum === 1 ? 'Biru' : 'Merah'}) MENANG!`;
-                    startBtn.textContent = "MAIN LAGI?";
-                    startBtn.onclick = resetGame;
-                    gameModal.style.display = 'flex';
-                }
-            };
-            
-            // Pasang event listener sebelum mobil bergerak
-            car.addEventListener('transitionend', moveEndHandler);
-            
-            // Mulai animasi
-            if (isMobile) {
-                car.style.left = (5 + movePercentage) + '%';
-            } else {
-                car.style.bottom = (8 + movePercentage) + '%'; // DIPERBAIKI: Posisi awal 8% bukan 5%
-            }
-        }
+        };
         
-        // Fungsi update papan skor
-        function updateScoreboard() {
-            score1Display.textContent = `Soal: ${player1Progress} / ${totalQuestions}`;
-            score2Display.textContent = `Soal: ${player2Progress} / ${totalQuestions}`;
-        }
+        // Tambahkan listener untuk SATU gerakan spesifik ini
+        car.addEventListener('transitionend', onMoveEnd);
         
-        // Fungsi reset posisi mobil - DIPERBAIKI
-        function resetCarPositions() {
-            if (isMobile) {
-                car1.style.left = '5%';
-                car2.style.left = '5%';
-            } else {
-                car1.style.bottom = '8%'; // DIPERBAIKI: Posisi awal 8% bukan 5%
-                car2.style.bottom = '8%'; // DIPERBAIKI: Posisi awal 8% bukan 5%
-            }
+        // Mulai animasi
+        if (isMobile) {
+            car.style.left = (5 + movePercentage) + '%';
+        } else {
+            car.style.bottom = (8 + movePercentage) + '%'; // Gunakan 8% sebagai posisi awal
         }
-        
-        // Fungsi reset game - DIPERBAIKI
-        function resetGame() {
-            // Reset status game
-            gameActive = false;
-            player1Progress = 0;
-            player2Progress = 0;
-            player1Penalized = false;
-            player2Penalized = false;
-            
-            // Reset posisi mobil
-            resetCarPositions();
-            
-            // Reset teks soal
-            q1Text.textContent = "Tunggu permainan dimulai...";
-            q2Text.textContent = "Tunggu permainan dimulai...";
-            
-            // Reset tombol pilihan
-            [...p1Choices, ...p2Choices].forEach((btn, index) => {
-                btn.textContent = `${String.fromCharCode(65 + (index % 4))}. ...`;
-                btn.className = 'choice-btn';
-                btn.disabled = false;
-                btn.style.display = 'block';
-            });
-            
-            // Reset modal
-            modalTitle.textContent = "Balapan F1 Matematika";
-            modalText.innerHTML = "Adu cepat dan tepat menjawab 10 soal matematika!<br>Pemain pertama yang mencapai garis finish menang!";
-            modalText.style.fontSize = '1.2rem';
-            modalText.style.fontWeight = 'normal';
-            modalText.style.lineHeight = 'normal';
-            startBtn.textContent = "MULAI GAME";
-            startBtn.onclick = startGame;
-            
-            // Mulai game baru
-            startGame();
-        }
-        
-        // Cek orientasi layar saat load
-        function checkOrientation() {
-            if (window.innerWidth <= 768) {
-                isMobile = true;
-                // Atur ulang mobil untuk mobile
-                car1.style.transform = 'rotate(0deg)'; // Putar ke kanan (default SVG)
-                car2.style.transform = 'rotate(0deg)'; // Putar ke kanan (default SVG)
-                car1.style.bottom = '25%'; // Jalur 1 mobile
-                car2.style.bottom = '60%'; // Jalur 2 mobile
-                car1.style.left = '5%'; // Posisi start mobile
-                car2.style.left = '5%';
-            } else {
-                isMobile = false;
-                car1.style.transform = 'rotate(-90deg)'; // Putar -90deg (Menghadap ke atas)
-                car2.style.transform = 'rotate(-90deg)'; // Putar -90deg (Menghadap ke atas)
-                car1.style.left = '20%'; // Jalur 1 desktop
-                car2.style.left = '60%'; // Jalur 2 desktop
-                car1.style.bottom = '8%'; // Posisi start desktop (diperbaiki)
-                car2.style.bottom = '8%'; // Posisi start desktop (diperbaiki)
-            }
-        }
+    }
     
-        // --- EVENT LISTENERS ---
-        window.onload = checkOrientation;
-        window.onresize = checkOrientation;
+    function updateScoreboard() {
+        score1Display.textContent = `Soal: ${player1Progress} / ${totalQuestions}`;
+        score2Display.textContent = `Soal: ${player2Progress} / ${totalQuestions}`;
+    }
+    
+    // Fungsi untuk me-reset posisi mobil ke start
+    function resetCarPositions() {
+        if (isMobile) {
+            car1.style.left = '5%';
+            car2.style.left = '5%';
+        } else {
+            car1.style.bottom = '8%'; // Posisi awal 8%
+            car2.style.bottom = '8%'; // Posisi awal 8%
+        }
+    }
+    
+    // FUNGSI YANG DIPERBAIKI
+    function resetGame() {
+        gameActive = false;
+        player1Progress = 0;
+        player2Progress = 0;
+        player1Penalized = false;
+        player2Penalized = false;
+        
+        resetCarPositions();
+        
+        // PERBAIKAN: Gunakan q1Text dan q2Text yang benar
+        q1Text.textContent = "Tunggu permainan dimulai...";
+        q2Text.textContent = "Tunggu permainan dimulai...";
+        
+        [...p1Choices, ...p2Choices].forEach((btn, index) => {
+            btn.textContent = `${String.fromCharCode(65 + (index % 4))}. ...`;
+            btn.className = 'choice-btn';
+            btn.disabled = false;
+            btn.style.display = 'block';
+        });
+        
+        modalTitle.textContent = "Balapan F1 Matematika";
+        modalText.innerHTML = "Adu cepat dan tepat menjawab 10 soal matematika!<br>Pemain pertama yang mencapai garis finish menang!";
+        modalText.style.fontSize = '1.2rem';
+        modalText.style.fontWeight = 'normal';
+        modalText.style.lineHeight = 'normal';
+        startBtn.textContent = "MULAI GAME";
         startBtn.onclick = startGame;
+    }
     
-    </script>
+    function checkOrientation() {
+        if (window.innerWidth <= 768) {
+            isMobile = true;
+            car1.style.transform = 'rotate(0deg)';
+            car2.style.transform = 'rotate(0deg)';
+            car1.style.bottom = '25%';
+            car2.style.bottom = '60%';
+            car1.style.left = '5%';
+            car2.style.left = '5%';
+        } else {
+            isMobile = false;
+            car1.style.transform = 'rotate(-90deg)';
+            car2.style.transform = 'rotate(-90deg)';
+            car1.style.left = '20%';
+            car2.style.left = '60%';
+            car1.style.bottom = '8%'; // Posisi awal 8%
+            car2.style.bottom = '8%'; // Posisi awal 8%
+        }
+    }
+
+    // --- EVENT LISTENERS ---
+    window.onload = checkOrientation;
+    window.onresize = checkOrientation;
+    startBtn.onclick = startGame;
+</script>
 </body>
 </html>
