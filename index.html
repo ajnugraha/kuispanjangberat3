@@ -167,17 +167,8 @@
         .car {
             position: absolute;
             /* HAPUS: font-size: 3rem; */ /* Ukuran mobil */
-            bottom: 5%; /* Posisi awal di atas garis start */
+            bottom: 8%; /* Posisi awal di atas garis start */
             transition: bottom 0.5s ease-in-out; /* Animasi pergerakan */
-            /* HAPUS: transform: rotate(-90deg); */ /* Memutar mobil agar menghadap ke atas */
-
-            /* BARU: Ubah jadi segitiga (tampilan drone) */
-            /* HAPUS: width: 0; */
-            /* HAPUS: height: 0; */
-            /* HAPUS: border-left: 15px solid transparent; */
-            /* HAPUS: border-right: 15px solid transparent; */
-            /* HAPUS: border-bottom: 30px solid #1e3a8a; */ /* Warna default, akan ditimpa */
-            
             /* BARU: Atur ukuran untuk SVG */
             width: 60px;
             height: 60px;
@@ -843,9 +834,6 @@
                 updateCarPosition(playerNum);
                 updateScoreboard();
                 
-                // Cek kemenangan
-                if (checkWinCondition(playerNum)) return;
-                
                 // BARU: Pindahkan setTimeout ke sini
                 // Lanjut ke soal berikutnya setelah jeda
                 setTimeout(() => {
@@ -891,7 +879,7 @@
             */
         }
 
-        // Fungsi update posisi mobil
+        // Fungsi update posisi mobil - VERSI PERBAIKI
         function updateCarPosition(playerNum) {
             const progress = (playerNum === 1) ? player1Progress : player2Progress;
             const car = (playerNum === 1) ? car1 : car2;
@@ -899,11 +887,15 @@
             // Pergerakan 80% dari total tinggi (misal 5% s.d 85%)
             const movePercentage = (progress / totalQuestions) * 80;
             
+            // PASANG EVENT LISTENER SEBELUM MOBIL BERGERAK
+            // Kita bungkus dalam fungsi agar bisa dihapus nanti
+            const moveEndHandler = (event) => handleMoveEnd(event, playerNum);
+            car.addEventListener('transitionend', moveEndHandler);
+        
+            // Mulai animasi
             if (isMobile) {
-                // Di mobile, mobil bergerak ke kanan (left)
                 car.style.left = (5 + movePercentage) + '%';
             } else {
-                // Di desktop, mobil bergerak ke atas (bottom)
                 car.style.bottom = (5 + movePercentage) + '%';
             }
         }
@@ -914,29 +906,35 @@
             score2Display.textContent = `Soal: ${player2Progress} / ${totalQuestions}`;
         }
 
-        // Fungsi cek kemenangan
-        function checkWinCondition(playerNum) {
+        /**
+         * Fungsi ini dipanggil KETIKA ANIMASI MOBIL TELAH SELESAI.
+         * @param {Event} event - Event object dari transitionend
+         * @param {number} playerNum - Nomor pemain (1 atau 2)
+         */
+        function handleMoveEnd(event, playerNum) {
+            const car = event.target; // Mobil mana yang berhenti?
+            
+            // HAPUS PENTING: Lepas event listener ini agar tidak dipanggil lagi di gerakan selanjutnya
+            car.removeEventListener('transitionend', (e) => handleMoveEnd(e, playerNum));
+        
+            // Sekarang, cek apakah pemain ini menang
             const progress = (playerNum === 1) ? player1Progress : player2Progress;
             if (progress >= totalQuestions) {
+                // Jika menang, hentikan game dan tampilkan modal
                 gameActive = false;
                 
-                // Tampilkan layar kemenangan
-                setTimeout(() => {
-                    // BARU: Reset font modal sebelum tampilkan teks kemenangan
-                    modalText.style.fontSize = '1.2rem';
-                    modalText.style.fontWeight = 'normal';
-                    modalText.style.lineHeight = 'normal';
-                    
-                    modalTitle.textContent = "FINISH!";
-                    modalText.textContent = `Pemain ${playerNum} (${playerNum === 1 ? 'Biru' : 'Merah'}) MENANG!`;
-                    startBtn.textContent = "MAIN LAGI?";
-                    startBtn.onclick = resetGame; // Ganti fungsi tombol
-                    gameModal.style.display = 'flex';
-                }, 500); // Tunggu animasi mobil sampai
-                
-                return true;
+                // Tidak perlu setTimeout lagi!
+                modalTitle.textContent = "FINISH!";
+                modalText.textContent = `Pemain ${playerNum} (${playerNum === 1 ? 'Biru' : 'Merah'}) MENANG!`;
+                startBtn.textContent = "MAIN LAGI?";
+                startBtn.onclick = resetGame;
+                gameModal.style.display = 'flex';
+        
+            } else {
+                // Jika belum menang, lanjutkan game (misalnya, ganti giliran atau buat soal baru)
+                // Anda mungkin perlu memanggil fungsi generateNewQuestion() dari sini
+                // generateNewQuestion(); 
             }
-            return false;
         }
         
         // Fungsi reset game
