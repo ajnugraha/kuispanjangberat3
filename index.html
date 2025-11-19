@@ -43,31 +43,107 @@
              background-color: #ffffff; /* BARU: Latar belakang putih */
         }
 
-        /* Area lintasan balap di tengah */
-        .race-track-area {
-            flex: 30%;
-            background-color: #507E78;
-            position: relative;
-            border-left: 8px dashed #f0f0f0; /* Garis putus-putus di sisi lintasan */
-            border-right: 8px dashed #f0f0f0;
-            overflow: hidden;
-            /* box-shadow: inset 0 0 20px rgba(0,0,0,0.5); */ /* Hapus bayangan gelap */
-        }
+        /* Area lintasan balap di tengah - DIPERBAIKI */
+    .race-track-area {
+        flex: 30%;
+        position: relative;
+        overflow: hidden;
+        
+        /* Ganti background dengan tekstur aspal */
+        background: linear-gradient(to bottom, #4a4a4a, #2a2a2a);
+        
+        /* Tambahkan pola untuk tekstur aspal */
+        background-image: 
+            repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(255,255,255,.05) 10px, rgba(255,255,255,.05) 20px),
+            repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(0,0,0,.1) 10px, rgba(0,0,0,.1) 20px);
+        
+        /* Tambahkan bayangan untuk efek 3D */
+        box-shadow: inset 0 0 50px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.3);
+    }
+    
+    /* Tambahkan marka jalan di tengah lintasan */
+    .race-track-area::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 100%;
+        width: 10px;
+        transform: translateX(-50%);
+        background-image: repeating-linear-gradient(
+            to bottom,
+            #ffffff 0px,
+            #ffffff 30px,
+            transparent 30px,
+            transparent 60px
+        );
+        z-index: 1;
+    }
+    
+    /* Tambahkan border yang lebih realistis */
+    .race-track-area::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 8px solid #f0f0f0;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        pointer-events: none;
+        z-index: 2;
+    }
 
         /* Garis Start dan Finish (pola kotak-kotak) */
         .finish-line, .start-line {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background-size: 20px 20px;
-            background-image:
-                linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
-                linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-            background-position: 0 0, 10px 10px;
-            border-top: 4px solid #1e3a8a; /* BARU: Border biru tua */
-            border-bottom: 4px solid #1e3a8a; /* BARU: Border biru tua */
-        }
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-size: 20px 20px;
+        background-image:
+            linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
+            linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
+        background-position: 0 0, 10px 10px;
+        border-top: 4px solid #1e3a8a;
+        border-bottom: 4px solid #1e3a8a;
+        z-index: 3;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    
+    /* Tambahkan bendera di pinggir lintasan */
+    .flag {
+        position: absolute;
+        width: 5px;
+        height: 30px;
+        background-color: #333;
+        z-index: 2;
+    }
+    
+    .flag::before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 0;
+        width: 20px;
+        height: 15px;
+        background-color: #ff0000;
+        clip-path: polygon(0 0, 100% 0, 80% 50%, 100% 100%, 0 100%);
+    }
+    
+    .flag-left {
+        left: 20px;
+    }
+    
+    .flag-right {
+        right: 20px;
+    }
+    
+    /* Tambahkan beberapa bendera di sepanjang lintasan */
+    .flag-1 { top: 20%; }
+    .flag-2 { top: 40%; }
+    .flag-3 { top: 60%; }
+    .flag-4 { top: 80%; }
 
         .finish-line {
             top: 10px; /* Garis finish di atas */
@@ -257,16 +333,33 @@
                 flex-direction: column; /* Susun ke bawah */
                 height: auto;
             }
-            .race-track-area {
-                flex: none; /* Hapus flex-grow */
-                height: 300px; /* Tinggi lintasan di mobile */
-                width: 100vw;
-                order: 1; /* Lintasan di paling atas */
-                border-left: none;
-                border-right: none;
-                border-top: 8px dashed #f0f0f0;
-                border-bottom: 8px dashed #f0f0f0;
-            }
+            @media (max-width: 768px) {
+        .race-track-area {
+            flex: none;
+            height: 300px;
+            width: 100vw;
+            order: 1;
+            border-left: none;
+            border-right: none;
+            border-top: 8px dashed #f0f0f0;
+            border-bottom: 8px dashed #f0f0f0;
+        }
+        
+        /* Ubah marka jalan untuk mobile (horizontal) */
+        .race-track-area::before {
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            transform: translateY(-50%);
+            background-image: repeating-linear-gradient(
+                to right,
+                #ffffff 0px,
+                #ffffff 30px,
+                transparent 30px,
+                transparent 60px
+            );
+        }
             .car {
                 /* HAPUS: transform: rotate(0deg); */ /* Mobil menghadap ke kanan */
                 /* HAPUS: font-size: 2rem; */
@@ -365,6 +458,15 @@
 
         <!-- Area Lintasan Balap (Tengah) -->
         <div class="race-track-area">
+            <div class="flag flag-left flag-1"></div>
+            <div class="flag flag-right flag-1"></div>
+            <div class="flag flag-left flag-2"></div>
+            <div class="flag flag-right flag-2"></div>
+            <div class="flag flag-left flag-3"></div>
+            <div class="flag flag-right flag-3"></div>
+            <div class="flag flag-left flag-4"></div>
+            <div class="flag flag-right flag-4"></div>
+            
             <div class="finish-line">
                 <div class="line-text">FINISH</div>
             </div>
@@ -451,7 +553,6 @@
                     <path transform="translate(0,0)" fill="rgb(39,47,53)" d="M 40.4295 1539.02 L 81.9438 1538.94 C 93.0233 1540.65 117.717 1539.96 129.592 1539.85 C 181.196 1541.29 232.828 1541.47 284.442 1540.4 L 287.725 1541.06 C 287.318 1542.21 286.885 1543.34 286.425 1544.47 C 278.317 1564.21 262.217 1576.7 240.473 1576.89 C 189.453 1577.34 138.125 1577.64 87.115 1576.79 C 62.7858 1576.38 48.3328 1561.07 40.4295 1539.02 z"/>
                 </svg>
             </div>
-            
             <div class="start-line">
                 <div class="line-text">START</div>
             </div>
